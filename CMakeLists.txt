@@ -22,5 +22,7 @@ MESSAGE(STATUS "VERSION: ${LUAFTPSERVER_VERSION}")
 ADD_DEFINITIONS(-DUSE_LUAFTPSERVER)
 ADD_DEFINITIONS(-DLUA_COMPAT_MODULE -DLUA_COMPAT_APIINTCASTS)
 
-LuaModuleImport("${LUA_MODULE}" "luaftpserver" "src/luaftpserver" "")
+ModuleImport("dmfineftpserver" "thirdparty/dmfineftpserver")
+
+LuaModuleImport("${LUA_MODULE}" "luaftpserver" "src/luaftpserver" "libfineftp")
 

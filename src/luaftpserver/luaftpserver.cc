@@ -22,18 +22,31 @@
 #include "luaftpserver.h"
 #include<iostream>
 
-Cluaftpserver::Cluaftpserver(sol::this_state L)
-: m_oState(L)
+Cluaftpserver::Cluaftpserver(sol::this_state L, const std::string& ip, int port)
+    : m_oState(L), m_oServer(ip, port)
 {
 
 }
 
-void Cluaftpserver::OPrint(const std::string& strInfo)
+bool Cluaftpserver::addUserAnonymous(const std::string& strPath,
+                                     const fineftp::Permission permissions)
 {
-    m_oState["print"].call(strInfo);
+    return m_oServer.addUserAnonymous(strPath, permissions);
 }
 
-void Cluaftpserver::GPrint(const std::string& strInfo)
+bool Cluaftpserver::addUser(const std::string& username,
+                            const std::string& password, const std::string& local_root_path,
+                            const fineftp::Permission permissions)
 {
-    std::cout << strInfo << std::endl;
+    return m_oServer.addUser(username, password, local_root_path, permissions);
+}
+
+bool Cluaftpserver::start(size_t thread_count)
+{
+    return m_oServer.start(thread_count);
+}
+
+bool Cluaftpserver::run()
+{
+    return m_oServer.run();
 }

@@ -24,17 +24,25 @@
 
 #include "sol.hpp"
 #include <string>
+#include "libfineftp/include/fineftp/server.h"
 
 class Cluaftpserver
 {
 public:
-    Cluaftpserver(sol::this_state L);
+    Cluaftpserver(sol::this_state L, const std::string& ip, int port);
 
-    void OPrint(const std::string& strInfo);
+    bool addUserAnonymous(const std::string& strPath,
+                          const fineftp::Permission permissions);
+    bool addUser(const std::string& username,
+                 const std::string& password, const std::string& local_root_path,
+                 const fineftp::Permission permissions);
 
-    static void GPrint(const std::string& strInfo);
+    bool start(size_t thread_count);
+    bool run();
 private:
     sol::state_view m_oState;
+
+    fineftp::FtpServer m_oServer;
 };
 
 #endif // __LUAFTPSERVER_H__

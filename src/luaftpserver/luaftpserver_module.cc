@@ -24,19 +24,21 @@
 
 namespace lua_module_luaftpserver
 {
-    static sol::table require_api(sol::this_state L)
-    {
-        sol::state_view lua(L);
-        sol::table module = lua.create_table();
-        module.set_function("GPrint",&Cluaftpserver::GPrint);
-        module.new_usertype<Cluaftpserver>(
-            "luaftpserver",
-            sol::constructors<Cluaftpserver(sol::this_state)>(),
-            "OPrint", &Cluaftpserver::OPrint
-            );
+static sol::table require_api(sol::this_state L)
+{
+    sol::state_view lua(L);
+    sol::table module = lua.create_table();
+    module.new_usertype<Cluaftpserver>(
+        "ftpserver",
+        sol::constructors<Cluaftpserver(sol::this_state, const std::string&, int)>(),
+        "addUserAnonymous", &Cluaftpserver::addUserAnonymous,
+        "addUser", &Cluaftpserver::addUser,
+        "start", &Cluaftpserver::start,
+        "run", &Cluaftpserver::run
+    );
 
-        return module;
-    }    
+    return module;
+}
 }
 
 LUA_API int luaopen_luaftpserver(lua_State* L)
