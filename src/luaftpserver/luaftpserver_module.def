@@ -1,0 +1,3 @@
+EXPORTS 
+    luaopen_luaftpserver
+    require_luaftpserver
