@@ -22,7 +22,7 @@
 #ifndef __LUAFTPSERVER_H__
 #define __LUAFTPSERVER_H__
 
-#include "sol.hpp"
+#include "sol/sol.hpp"
 #include <string>
 #include "libfineftp/include/fineftp/server.h"
 

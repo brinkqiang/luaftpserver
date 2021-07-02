@@ -1,6 +1,5 @@
 -- lua script
-
-_ENV= require("luaftpserver")
+_ENV = require("luaftpserver")
 
 local ftpserver = ftpserver.new("0.0.0.0", 2121)
 
