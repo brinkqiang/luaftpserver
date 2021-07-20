@@ -26,3 +26,12 @@ ModuleImport("dmfineftpserver" "thirdparty/dmfineftpserver")
 
 LuaModuleImport("${LUA_MODULE}" "luaftpserver" "src/luaftpserver" "libfineftp")
 
+IF (WIN32)
+ADD_CUSTOM_COMMAND(
+    TARGET luaftpserver
+    PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${CMAKE_CURRENT_SOURCE_DIR}/config/lua_dkm_debug.json
+    $<TARGET_FILE_DIR:luaftpserver>
+)
+ENDIF(WIN32)
