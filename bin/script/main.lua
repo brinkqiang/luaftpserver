@@ -22,7 +22,7 @@ local luaftpserver = require("luaftpserver")
 
 local ftpserver = luaftpserver.ftpserver.new("0.0.0.0", 2121)
 
-ftpserver:addUserAnonymous("anonymous", luaftpserver.Permission.FileRead | luaftpserver.Permission.DirList )
+ftpserver:addUserAnonymous("anonymous", luaftpserver.Permission.ReadOnly )
 ftpserver:addUser("user",   "pass", "root", luaftpserver.Permission.All)
 
 ftpserver:start(4)
