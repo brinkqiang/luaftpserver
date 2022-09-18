@@ -24,21 +24,39 @@
 
 namespace lua_module_luaftpserver
 {
-static sol::table require_api(sol::this_state L)
-{
-    sol::state_view lua(L);
-    sol::table module = lua.create_table();
-    module.new_usertype<Cluaftpserver>(
-        "ftpserver",
-        sol::constructors<Cluaftpserver(sol::this_state, const std::string&, int)>(),
-        "addUserAnonymous", &Cluaftpserver::addUserAnonymous,
-        "addUser", &Cluaftpserver::addUser,
-        "start", &Cluaftpserver::start,
-        "run", &Cluaftpserver::run
-    );
+    static sol::table require_api(sol::this_state L)
+    {
+        sol::state_view lua(L);
+        sol::table module = lua.create_table();
 
-    return module;
-}
+        module.new_enum("Permission",
+            "FileRead", fineftp::Permission::FileRead,
+            "FileWrite", fineftp::Permission::FileWrite,
+            "FileAppend", fineftp::Permission::FileAppend,
+            "FileDelete", fineftp::Permission::FileDelete,
+            "FileRename", fineftp::Permission::FileRename,
+
+            "DirList", fineftp::Permission::FileWrite,
+            "DirCreate", fineftp::Permission::DirCreate,
+            "DirDelete", fineftp::Permission::DirDelete,
+            "DirRename", fineftp::Permission::DirRename,
+
+            "All", fineftp::Permission::All,
+            "ReadOnly", fineftp::Permission::ReadOnly,
+            "None", fineftp::Permission::None
+        );
+
+        module.new_usertype<Cluaftpserver>(
+            "ftpserver",
+            sol::constructors<Cluaftpserver(sol::this_state, const std::string&, int)>(),
+            "addUserAnonymous", &Cluaftpserver::addUserAnonymous,
+            "addUser", &Cluaftpserver::addUser,
+            "start", &Cluaftpserver::start,
+            "run", &Cluaftpserver::run
+            );
+
+        return module;
+    }
 }
 
 LUA_API int luaopen_luaftpserver(lua_State* L)
