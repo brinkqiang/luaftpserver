@@ -36,7 +36,7 @@ namespace lua_module_luaftpserver
             "FileDelete", fineftp::Permission::FileDelete,
             "FileRename", fineftp::Permission::FileRename,
 
-            "DirList", fineftp::Permission::FileWrite,
+            "DirList", fineftp::Permission::DirList,
             "DirCreate", fineftp::Permission::DirCreate,
             "DirDelete", fineftp::Permission::DirDelete,
             "DirRename", fineftp::Permission::DirRename,
