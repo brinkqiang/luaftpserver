@@ -42,6 +42,7 @@ namespace lua_module_luaftpserver
             "DirRename", fineftp::Permission::DirRename,
 
             "All", fineftp::Permission::All,
+            "UserOnly", fineftp::Permission::UserOnly,
             "ReadOnly", fineftp::Permission::ReadOnly,
             "None", fineftp::Permission::None
         );
