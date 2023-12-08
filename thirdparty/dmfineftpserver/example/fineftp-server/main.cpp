@@ -12,6 +12,9 @@ int main()
                                   "anonymous";
     DMCreateDirectories(local_anonymous);
 
+    std::string local_user = DMGetRootPath() + PATH_DELIMITER_STR + "user";
+    DMCreateDirectories(local_user);
+
     std::string local_root = DMGetRootPath() + PATH_DELIMITER_STR + "root";
     DMCreateDirectories(local_root);
 
@@ -22,12 +25,9 @@ int main()
     // Add the well known anonymous user and some normal users. The anonymous user
     // can log in with username "anonyous" or "ftp" and any password. The normal
     // users have to provide their username and password.
-    server.addUserAnonymous(local_anonymous, fineftp::Permission::All);
-    server.addUser         ("MyUser",   "MyPassword", local_root,
-                            fineftp::Permission::ReadOnly);
-    server.addUser         ("Uploader", "123456",     local_root,
-                            fineftp::Permission::DirList | fineftp::Permission::DirCreate |
-                            fineftp::Permission::FileWrite | fineftp::Permission::FileAppend);
+    server.addUserAnonymous(local_anonymous, fineftp::Permission::ReadOnly);
+    server.addUser         ("user", "user_password", local_user, fineftp::Permission::UserOnly);
+    server.addUser         ("root", "root_password", local_root, fineftp::Permission::All);
 
     // Start the FTP server with 4 threads. More threads will increase the
     // performance with multiple clients, but don't over-do it.
