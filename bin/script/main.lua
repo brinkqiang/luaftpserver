@@ -14,6 +14,7 @@
 --    DirRename  = (1 << 8),  /**< Rename existing directories */
 --
 --    All      = (FileRead | FileWrite | FileAppend | FileDelete | FileRename | DirList | DirCreate | DirDelete | DirRename),
+--    UserOnly = (FileRead | FileWrite | FileAppend | FileRename | DirList | DirCreate | DirRename),
 --    ReadOnly = (FileRead | DirList),
 --    None     = 0
 --  };
@@ -23,7 +24,8 @@ local luaftpserver = require("luaftpserver")
 local ftpserver = luaftpserver.ftpserver.new("0.0.0.0", 2121)
 
 ftpserver:addUserAnonymous("anonymous", luaftpserver.Permission.ReadOnly )
-ftpserver:addUser("user",   "pass", "root", luaftpserver.Permission.All)
+ftpserver:addUser("user",   "pass", "root", luaftpserver.Permission.UserOnly)
+ftpserver:addUser("root",   "pass", "root", luaftpserver.Permission.All)
 
 ftpserver:start(4)
 ftpserver:run()

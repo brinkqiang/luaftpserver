@@ -31,11 +31,13 @@ local luaftpserver = require("luaftpserver")
 
 local ftpserver = luaftpserver.ftpserver.new("0.0.0.0", 2121)
 
-ftpserver:addUserAnonymous("anonymous", 33)
-ftpserver:addUser("user",   "pass", "root", 511)
+ftpserver:addUserAnonymous("anonymous", luaftpserver.Permission.ReadOnly )
+ftpserver:addUser("user",   "pass", "root", luaftpserver.Permission.UserOnly)
+ftpserver:addUser("root",   "pass", "root", luaftpserver.Permission.All)
 
 ftpserver:start(4)
 ftpserver:run()
+
 ```
 ## Contacts
 [![Join the chat](https://badges.gitter.im/brinkqiang/luaftpserver/Lobby.svg)](https://gitter.im/brinkqiang/luaftpserver)
