@@ -24,6 +24,8 @@
 
 #include "sol/sol.hpp"
 #include <string>
+#include <limits>
+
 #include "libfineftp/include/fineftp/server.h"
 
 class Cluaftpserver
