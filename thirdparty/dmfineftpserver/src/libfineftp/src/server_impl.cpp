@@ -136,6 +136,10 @@ bool FtpServerImpl::start(size_t thread_count)
         thread_pool_.emplace_back([=] {io_service_.run(); });
     }
 
+    fmt::print("---------------------------------------------------------------\n");
+    fmt::print("{} dmevent loop {} ...\n", DMGetExeName(), "start");
+    fmt::print("---------------------------------------------------------------\n");
+
     return true;
 }
 
@@ -214,6 +218,11 @@ bool FtpServerImpl::poll()
 
 bool FtpServerImpl::run()
 {
+
+    fmt::print("---------------------------------------------------------------\n");
+    fmt::print("{} dmevent loop {} ...\n", DMGetExeName(), "run");
+    fmt::print("---------------------------------------------------------------\n");
+
     bool bBusy = false;
 
     for (; !stop_;)
