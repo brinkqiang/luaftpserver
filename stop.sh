@@ -1,1 +1,1 @@
-sudo docker service rm luaftpserver
+sudo docker stop luaftpserver
