@@ -14,4 +14,4 @@ RUN bash build.sh
 WORKDIR /home/myapp/luaftp/bin/relwithdebinfo
 
 # Start the application
-CMD ["lua", "../script/main.lua"]
+CMD ["./lua", "../script/main.lua"]
