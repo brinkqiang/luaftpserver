@@ -1,0 +1,1 @@
+sudo docker run --rm -d -p 52121:2121 --name luaftpserver luaftpserver
