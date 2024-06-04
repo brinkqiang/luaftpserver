@@ -40,6 +40,5 @@ ftpserver:run()
 
 ```
 ## Contacts
-[![Join the chat](https://badges.gitter.im/brinkqiang/luaftpserver/Lobby.svg)](https://gitter.im/brinkqiang/luaftpserver)
 
 ## Thanks
