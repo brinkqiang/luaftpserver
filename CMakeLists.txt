@@ -57,6 +57,8 @@ install(DIRECTORY ${EXECUTABLE_OUTPUT_PATH}/
         PATTERN "*.zip" EXCLUDE
         PATTERN "*.json" EXCLUDE
         PATTERN "*fineftp*" EXCLUDE
+        PATTERN "*.exp" EXCLUDE
+        PATTERN "*test*" EXCLUDE
         )
 
 
