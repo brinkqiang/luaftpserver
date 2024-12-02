@@ -2,6 +2,7 @@
 
 #include "server_impl.h"
 #include <memory>
+#include "dmutil.h"
 
 namespace fineftp
 {
@@ -20,12 +21,17 @@ bool FtpServer::addUser(const std::string& username,
                         const std::string& password, const std::string& local_root_path,
                         const Permission permissions)
 {
-    return ftp_server_->addUser(username, password, local_root_path, permissions);
+	std::string local_root = DMGetRootPath() + PATH_DELIMITER_STR + local_root_path;
+	DMCreateDirectories(local_root);
+
+    return ftp_server_->addUser(username, password, local_root, permissions);
 }
 
 bool FtpServer::addUserAnonymous(const std::string& local_root_path,
                                  const Permission permissions)
 {
+	std::string local_root = DMGetRootPath() + PATH_DELIMITER_STR + local_root_path;
+	DMCreateDirectories(local_root);
     return ftp_server_->addUserAnonymous(local_root_path, permissions);
 }
 
